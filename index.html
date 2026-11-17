@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101219">
+  <meta name="description" content="Dark Notes — ghi chú văn bản với các tab, chạy trực tiếp trên trình duyệt.">
+  <title>Dark Notes — Ghi chú của tôi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Danh sách ghi chú">
+      <div class="brand-row">
+        <div class="brand-icon" aria-hidden="true">✦</div>
+        <div class="brand-copy"><strong>Dark Notes</strong><span>Không gian ghi chú cá nhân</span></div>
+        <button type="button" class="icon-btn sidebar-close" id="closeSidebar" aria-label="Đóng menu">✕</button>
+      </div>
+      <div class="sidebar-main">
+        <div class="group-header"><span>THƯ VIỆN CỦA BẠN</span><span id="noteCount">0 ghi chú</span></div>
+        <button type="button" id="addNote" class="add-note"><span class="plus">＋</span> Tạo tab mới <span class="shortcut">Alt + N</span></button>
+        <div id="noteList" class="note-list" role="list" aria-label="Các tab ghi chú"></div>
+      </div>
+      <div class="sidebar-footer">
+        <div class="sync-info"><span class="status-dot"></span><span>Lưu trên trình duyệt này</span></div>
+        <div class="backup-buttons">
+          <button type="button" id="exportBtn" class="outline-btn" title="Tải bản sao lưu JSON">↓ Xuất dữ liệu</button>
+          <button type="button" id="importBtn" class="outline-btn" title="Nhập dữ liệu từ bản sao lưu">↑ Nhập dữ liệu</button>
+          <input id="importFile" type="file" accept="application/json,.json" hidden>
+        </div>
+      </div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+    <main class="workspace">
+      <header class="topbar">
+        <div class="top-left">
+          <button type="button" class="icon-btn mobile-menu" id="openSidebar" aria-label="Mở danh sách ghi chú">☰</button>
+          <div class="crumb"><span class="crumb-root">Thư viện</span><span class="divider-slash">/</span><span id="currentCrumb">Ghi chú</span></div>
+        </div>
+        <div class="top-right"><span class="save-icon">●</span><span id="saveStatus">Đã lưu</span><span class="top-separator"></span><span class="private-pill">◈ Riêng tư trên thiết bị</span></div>
+      </header>
+      <section class="document-shell" aria-label="Trình soạn thảo">
+        <div class="document-top">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> GHI CHÚ CÁ NHÂN</div>
+          <input id="noteTitle" type="text" maxlength="100" placeholder="Tiêu đề ghi chú" aria-label="Tiêu đề ghi chú" autocomplete="off" spellcheck="false">
+          <div class="doc-meta"><span id="lastEdited">Vừa cập nhật</span><span class="meta-dot">·</span><span id="wordCount">0 từ</span></div>
+        </div>
+        <div class="toolbar" role="toolbar" aria-label="Định dạng văn bản">
+          <span class="toolbar-label">Văn bản</span>
+          <span class="toolbar-divider"></span>
+          <button type="button" id="decreaseFont" class="tool-btn" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button>
+          <span id="fontSizeDisplay" class="size-value" aria-live="polite">16</span>
+          <button type="button" id="increaseFont" class="tool-btn" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button>
+          <span class="toolbar-divider"></span>
+          <button type="button" id="boldBtn" class="tool-btn bold-button" title="In đậm văn bản đã chọn (Ctrl+B)" aria-label="In đậm văn bản đã chọn"><b>B</b></button>
+          <span class="toolbar-tip">Chọn đoạn văn bản để in đậm</span>
+          <span class="toolbar-spacer"></span>
+          <button type="button" id="deleteNote" class="tool-btn delete-button" title="Xóa ghi chú hiện tại" aria-label="Xóa ghi chú hiện tại">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m5 4v7m4-7v7"/></svg>
+            <span>Xóa</span>
+          </button>
+        </div>
+        <div class="editor-wrapper">
+          <div id="editor" class="editor" contenteditable="true" role="textbox" aria-label="Nội dung ghi chú" aria-multiline="true" data-placeholder="Bắt đầu viết ghi chú của bạn ở đây..." spellcheck="true"></div>
+        </div>
+        <footer class="editor-footer"><span>✧ Tập trung vào những điều quan trọng.</span><span>Dark Notes v1.0</span></footer>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
